@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SmartClassroom - Announcements</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', sans-serif; background: #0f172a; color: #e2e8f0; }
+
+    .navbar {
+      background: #1e293b;
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid #334155;
+    }
+    .navbar h1 { font-size: 18px; }
+    .back-btn {
+      background: #6366f1;
+      color: #fff;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .container { padding: 24px; max-width: 700px; margin: 0 auto; }
+
+    .add-box {
+      background: #1e293b;
+      border-radius: 16px;
+      padding: 20px;
+      margin-bottom: 24px;
+    }
+    .add-box h2 { font-size: 14px; color: #94a3b8; margin-bottom: 12px; }
+    .add-box input {
+      width: 100%;
+      background: #0f172a;
+      border: 1.5px solid #334155;
+      border-radius: 10px;
+      padding: 10px 14px;
+      color: #e2e8f0;
+      font-size: 13px;
+      margin-bottom: 10px;
+      outline: none;
+    }
+    .add-box input:focus { border-color: #6366f1; }
+    .add-box select {
+      width: 100%;
+      background: #0f172a;
+      border: 1.5px solid #334155;
+      border-radius: 10px;
+      padding: 10px 14px;
+      color: #e2e8f0;
+      font-size: 13px;
+      margin-bottom: 10px;
+      outline: none;
+    }
+    .post-btn {
+      background: #6366f1;
+      color: #fff;
+      border: none;
+      padding: 10px 24px;
+      border-radius: 10px;
+      font-weight: 700;
+      cursor: pointer;
+      font-size: 14px;
+    }
+    .post-btn:hover { background: #4f46e5; }
+
+    .list { display: flex; flex-direction: column; gap: 12px; }
+
+    .ann-card {
+      background: #1e293b;
+      border-radius: 14px;
+      padding: 16px 20px;
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      border-left: 4px solid #6366f1;
+    }
+    .ann-card .icon { font-size: 24px; }
+    .ann-card .text { flex: 1; }
+    .ann-card .text h3 { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+    .ann-card .text p  { font-size: 11px; color: #64748b; }
+    .ann-card .del-btn {
+      background: none;
+      border: none;
+      color: #334155;
+      cursor: pointer;
+      font-size: 18px;
+    }
+    .ann-card .del-btn:hover { color: #ef4444; }
+  </style>
+</head>
+<body>
+
+  <div class="navbar">
+    <h1>📢 Announcements</h1>
+    <a class="back-btn" href="dashboard.html">← Back</a>
+  </div>
+
+  <div class="container">
+
+    <div class="add-box">
+      <h2>➕ New Announcement</h2>
+      <input type="text" id="ann-text" placeholder="Type your announcement..." />
+      <select id="ann-type">
+        <option value="info">ℹ️ Info</option>
+        <option value="exam">📝 Exam</option>
+        <option value="event">🎉 Event</option>
+        <option value="change">🔄 Schedule Change</option>
+      </select>
+      <button class="post-btn" onclick="addAnn()">Post</button>
+    </div>
+
+    <div class="list" id="ann-list"></div>
+
+  </div>
+
+  <script>
+    const typeConfig = {
+      info:   { icon: 'ℹ️',  color: '#10b981' },
+      exam:   { icon: '📝', color: '#ef4444' },
+      event:  { icon: '🎉', color: '#8b5cf6' },
+      change: { icon: '🔄', color: '#f59e0b' },
+    };
+
+    let announcements = [
+      { id: 1, text: 'Mid-term exams scheduled for next week.', type: 'exam',   time: '2 hours ago' },
+      { id: 2, text: 'Physics Lab moved to Lab B on Friday.',   type: 'change', time: '5 hours ago' },
+      { id: 3, text: 'Annual Day rehearsal - Hall 1, Thursday.', type: 'event', time: '1 day ago'   },
+      { id: 4, text: 'Library will be closed on Saturday.',      type: 'info',  time: '2 days ago'  },
+    ];
+
+    function render() {
+      const list = document.getElementById('ann-list');
+      list.innerHTML = '';
+      announcements.forEach(a => {
+        const cfg = typeConfig[a.type];
+        const card = document.createElement('div');
+        card.className = 'ann-card';
+        card.style.borderColor = cfg.color;
+        card.innerHTML = `
+          <div class="icon">${cfg.icon}</div>
+          <div class="text">
+            <h3>${a.text}</h3>
+            <p>${a.time}</p>
+          </div>
+          <button class="del-btn" onclick="deleteAnn(${a.id})">✕</button>
+        `;
+        list.appendChild(card);
+      });
+    }
+
+    function addAnn() {
+      const text = document.getElementById('ann-text').value.trim();
+      const type = document.getElementById('ann-type').value;
+      if (!text) return;
+      announcements.unshift({ id: Date.now(), text, type, time: 'Just now' });
+      document.getElementById('ann-text').value = '';
+      render();
+    }
+
+    function deleteAnn(id) {
+      announcements = announcements.filter(a => a.id !== id);
+      render();
+    }
+
+    render();
+  </script>
+
+</body>
+</html>

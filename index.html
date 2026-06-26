@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SmartClassroom - Login</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div class="bg-shapes">
+    <div class="shape s1"></div>
+    <div class="shape s2"></div>
+    <div class="shape s3"></div>
+  </div>
+
+  <div class="login-wrapper">
+    <div class="login-card">
+
+      <div class="logo">
+        <div class="logo-icon">🎓</div>
+        <h1>SmartClassroom</h1>
+        <p>Timetable Scheduler System</p>
+      </div>
+
+      <form id="loginForm" onsubmit="handleLogin(event)">
+
+        <div class="input-group">
+          <label>USERNAME</label>
+          <div class="input-box">
+            <span class="icon">👤</span>
+            <input type="text" id="username"
+                   placeholder="Enter username" required />
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label>PASSWORD</label>
+          <div class="input-box">
+            <span class="icon">🔒</span>
+            <input type="password" id="password"
+                   placeholder="Enter password" required />
+            <span class="toggle-pw" onclick="togglePw()">👁</span>
+          </div>
+        </div>
+
+        <div id="error-msg" class="error-msg"></div>
+
+        <button type="submit" class="login-btn">
+          <span id="btn-text">Login</span>
+        </button>
+
+      </form>
+
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SmartClassroom - Timetable</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', sans-serif; background: #0f172a; color: #e2e8f0; }
+
+    .navbar {
+      background: #1e293b;
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid #334155;
+    }
+    .navbar h1 { font-size: 18px; }
+    .back-btn {
+      background: #6366f1;
+      color: #fff;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .container { padding: 24px; overflow-x: auto; }
+
+    h2 { margin-bottom: 16px; color: #94a3b8; font-size: 15px; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 700px;
+      background: #1e293b;
+      border-radius: 16px;
+      overflow: hidden;
+    }
+    th {
+      background: #0f172a;
+      padding: 12px 16px;
+      font-size: 12px;
+      color: #64748b;
+      font-weight: 700;
+      text-align: center;
+    }
+    td {
+      padding: 10px;
+      border-top: 1px solid #334155;
+      text-align: center;
+      font-size: 13px;
+    }
+    .time-col {
+      color: #64748b;
+      font-weight: 700;
+      font-size: 12px;
+      background: #0f172a;
+    }
+    .slot {
+      background: #6366f122;
+      border: 1.5px solid #6366f144;
+      border-radius: 8px;
+      padding: 6px 4px;
+      font-size: 11px;
+      font-weight: 700;
+      color: #6366f1;
+    }
+    .empty {
+      color: #334155;
+      font-size: 18px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="navbar">
+    <h1>📅 Timetable</h1>
+    <a class="back-btn" href="dashboard.html">← Back</a>
+  </div>
+
+  <div class="container">
+    <h2>Weekly Schedule</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>TIME</th>
+          <th>MON</th>
+          <th>TUE</th>
+          <th>WED</th>
+          <th>THU</th>
+          <th>FRI</th>
+          <th>SAT</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="time-col">8:00 AM</td>
+          <td><div class="slot">Maths</div></td>
+          <td><div class="slot">Physics</div></td>
+          <td><div class="slot">Tamil</div></td>
+          <td><div class="slot">English</div></td>
+          <td><div class="slot">CS</div></td>
+          <td><div class="slot">Biology</div></td>
+        </tr>
+        <tr>
+          <td class="time-col">9:00 AM</td>
+          <td><div class="slot">CS</div></td>
+          <td><div class="slot">Chemistry</div></td>
+          <td><div class="slot">Maths</div></td>
+          <td><div class="slot">Physics</div></td>
+          <td><div class="slot">Tamil</div></td>
+          <td><div class="slot">History</div></td>
+        </tr>
+        <tr>
+          <td class="time-col">10:00 AM</td>
+          <td><div class="slot">English</div></td>
+          <td><div class="slot">Tamil</div></td>
+          <td><div class="slot">Biology</div></td>
+          <td><div class="slot">CS</div></td>
+          <td><div class="slot">English</div></td>
+          <td class="empty">+</td>
+        </tr>
+        <tr>
+          <td class="time-col">11:00 AM</td>
+          <td class="empty">+</td>
+          <td><div class="slot">Maths</div></td>
+          <td><div class="slot">History</div></td>
+          <td><div class="slot">Maths</div></td>
+          <td class="empty">+</td>
+          <td class="empty">+</td>
+        </tr>
+        <tr>
+          <td class="time-col">12:00 PM</td>
+          <td colspan="6" style="color:#334155; font-size:13px;">🍽️ Lunch Break</td>
+        </tr>
+        <tr>
+          <td class="time-col">1:00 PM</td>
+          <td><div class="slot">Physics</div></td>
+          <td class="empty">+</td>
+          <td><div class="slot">Chemistry</div></td>
+          <td><div class="slot">Tamil</div></td>
+          <td><div class="slot">Maths</div></td>
+          <td class="empty">+</td>
+        </tr>
+        <tr>
+          <td class="time-col">2:00 PM</td>
+          <td><div class="slot">History</div></td>
+          <td><div class="slot">Biology</div></td>
+          <td class="empty">+</td>
+          <td><div class="slot">Chemistry</div></td>
+          <td><div class="slot">Physics</div></td>
+          <td class="empty">+</td>
+        </tr>
+        <tr>
+          <td class="time-col">3:00 PM</td>
+          <td class="empty">+</td>
+          <td><div class="slot">English</div></td>
+          <td><div class="slot">CS</div></td>
+          <td class="empty">+</td>
+          <td><div class="slot">Biology</div></td>
+          <td class="empty">+</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</body>
+</html>

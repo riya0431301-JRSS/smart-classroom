@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SmartClassroom - Rooms</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', sans-serif; background: #0f172a; color: #e2e8f0; }
+
+    .navbar {
+      background: #1e293b;
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid #334155;
+    }
+    .navbar h1 { font-size: 18px; }
+    .back-btn {
+      background: #6366f1;
+      color: #fff;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .container { padding: 24px; max-width: 900px; margin: 0 auto; }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 16px;
+    }
+
+    .card {
+      background: #1e293b;
+      border-radius: 16px;
+      padding: 20px;
+      border-left: 4px solid #6366f1;
+    }
+    .card .icon { font-size: 32px; margin-bottom: 10px; }
+    .card h2 { font-size: 15px; font-weight: 700; margin-bottom: 6px; }
+    .card p { font-size: 12px; color: #64748b; line-height: 1.8; }
+    .card .status {
+      margin-top: 12px;
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 700;
+    }
+    .available { background: #10b98122; color: #10b981; }
+    .occupied  { background: #ef444422; color: #ef4444; }
+  </style>
+</head>
+<body>
+
+  <div class="navbar">
+    <h1>🏫 Rooms</h1>
+    <a class="back-btn" href="dashboard.html">← Back</a>
+  </div>
+
+  <div class="container">
+    <div class="cards">
+
+      <div class="card" style="border-color:#6366f1;">
+        <div class="icon">🏫</div>
+        <h2>Room 101</h2>
+        <p>Capacity: 40 students<br/>Type: Classroom<br/>Floor: 1st</p>
+        <span class="status available">✅ Available</span>
+      </div>
+
+      <div class="card" style="border-color:#f59e0b;">
+        <div class="icon">🏫</div>
+        <h2>Room 102</h2>
+        <p>Capacity: 40 students<br/>Type: Classroom<br/>Floor: 1st</p>
+        <span class="status occupied">🔴 Occupied</span>
+      </div>
+
+      <div class="card" style="border-color:#10b981;">
+        <div class="icon">🏫</div>
+        <h2>Room 103</h2>
+        <p>Capacity: 40 students<br/>Type: Classroom<br/>Floor: 2nd</p>
+        <span class="status available">✅ Available</span>
+      </div>
+
+      <div class="card" style="border-color:#ef4444;">
+        <div class="icon">🏫</div>
+        <h2>Room 104</h2>
+        <p>Capacity: 40 students<br/>Type: Classroom<br/>Floor: 2nd</p>
+        <span class="status occupied">🔴 Occupied</span>
+      </div>
+
+      <div class="card" style="border-color:#10b981;">
+        <div class="icon">🔬</div>
+        <h2>Lab A</h2>
+        <p>Capacity: 30 students<br/>Type: Science Lab<br/>Floor: 3rd</p>
+        <span class="status available">✅ Available</span>
+      </div>
+
+      <div class="card" style="border-color:#8b5cf6;">
+        <div class="icon">💻</div>
+        <h2>Lab B</h2>
+        <p>Capacity: 30 students<br/>Type: Computer Lab<br/>Floor: 3rd</p>
+        <span class="status occupied">🔴 Occupied</span>
+      </div>
+
+      <div class="card" style="border-color:#14b8a6;">
+        <div class="icon">🔭</div>
+        <h2>Lab C</h2>
+        <p>Capacity: 25 students<br/>Type: Physics Lab<br/>Floor: 3rd</p>
+        <span class="status available">✅ Available</span>
+      </div>
+
+      <div class="card" style="border-color:#ec4899;">
+        <div class="icon">🎭</div>
+        <h2>Hall 1</h2>
+        <p>Capacity: 200 students<br/>Type: Seminar Hall<br/>Floor: Ground</p>
+        <span class="status available">✅ Available</span>
+      </div>
+
+      <div class="card" style="border-color:#f97316;">
+        <div class="icon">🎭</div>
+        <h2>Hall 2</h2>
+        <p>Capacity: 150 students<br/>Type: Conference Hall<br/>Floor: Ground</p>
+        <span class="status available">✅ Available</span>
+      </div>
+
+      <div class="card" style="border-color:#06b6d4;">
+        <div class="icon">📚</div>
+        <h2>Library</h2>
+        <p>Capacity: 100 students<br/>Type: Reading Room<br/>Floor: 1st</p>
+        <span class="status available">✅ Available</span>
+      </div>
+
+      <div class="card" style="border-color:#84cc16;">
+        <div class="icon">👨‍🏫</div>
+        <h2>Staff Room</h2>
+        <p>Capacity: 20 teachers<br/>Type: Staff Area<br/>Floor: Ground</p>
+        <span class="status occupied">🔴 Occupied</span>
+      </div>
+
+      <div class="card" style="border-color:#f43f5e;">
+        <div class="icon">🏢</div>
+        <h2>Principal Office</h2>
+        <p>Capacity: 10 persons<br/>Type: Admin Office<br/>Floor: Ground</p>
+        <span class="status available">✅ Available</span>
+      </div>
+
+    </div>
+  </div>
+
+</body>
+</html>

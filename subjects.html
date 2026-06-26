@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SmartClassroom - Subjects</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', sans-serif; background: #0f172a; color: #e2e8f0; }
+
+    .navbar {
+      background: #1e293b;
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid #334155;
+    }
+    .navbar h1 { font-size: 18px; }
+    .back-btn {
+      background: #6366f1;
+      color: #fff;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .container { padding: 24px; max-width: 900px; margin: 0 auto; }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 16px;
+    }
+
+    .card {
+      background: #1e293b;
+      border-radius: 16px;
+      padding: 20px;
+      border-top: 4px solid #6366f1;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px #0006; }
+    .card .icon { font-size: 32px; margin-bottom: 10px; }
+    .card h2 { font-size: 15px; font-weight: 700; margin-bottom: 4px; }
+    .card p { font-size: 12px; color: #64748b; }
+    .card .teacher {
+      margin-top: 10px;
+      font-size: 12px;
+      color: #6366f1;
+      font-weight: 600;
+    }
+
+    /* Modal */
+    .modal-bg {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: #000a;
+      z-index: 999;
+      align-items: center;
+      justify-content: center;
+    }
+    .modal-bg.show { display: flex; }
+
+    .modal {
+      background: #1e293b;
+      border-radius: 20px;
+      padding: 28px;
+      width: 90%;
+      max-width: 420px;
+      box-shadow: 0 20px 60px #0008;
+      animation: popIn 0.3s ease;
+    }
+    @keyframes popIn {
+      from { transform: scale(0.9); opacity: 0; }
+      to   { transform: scale(1);   opacity: 1; }
+    }
+
+    .modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+    .modal-header h2 { font-size: 18px; font-weight: 800; }
+    .close-btn {
+      background: #334155;
+      border: none;
+      color: #e2e8f0;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .detail-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 12px 0;
+      border-bottom: 1px solid #334155;
+    }
+    .detail-row:last-child { border-bottom: none; }
+    .detail-row .d-icon { font-size: 20px; width: 28px; }
+    .detail-row .d-info { flex: 1; }
+    .detail-row .d-label { font-size: 10px; color: #64748b; text-transform: uppercase; font-weight: 700; margin-bottom: 2px; }
+    .detail-row .d-value { font-size: 14px; color: #e2e8f0; font-weight: 600; }
+
+    .class-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
+    .class-tag {
+      background: #6366f122;
+      color: #6366f1;
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 700;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="navbar">
+    <h1>📚 Subjects</h1>
+    <a class="back-btn" href="dashboard.html">← Back</a>
+  </div>
+
+  <div class="container">
+    <div class="cards" id="cards"></div>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal-bg" id="modal-bg" onclick="closeModal(event)">
+    <div class="modal" id="modal">
+      <div class="modal-header">
+        <h2 id="m-title"></h2>
+        <button class="close-btn" onclick="closeModalBtn()">✕</button>
+      </div>
+      <div class="detail-row">
+        <div class="d-icon">👨‍🏫</div>
+        <div class="d-info">
+          <div class="d-label">Teacher</div>
+          <div class="d-value" id="m-teacher"></div>
+        </div>
+      </div>
+      <div class="detail-row">
+        <div class="d-icon">📞</div>
+        <div class="d-info">
+          <div class="d-label">Phone</div>
+          <div class="d-value" id="m-phone"></div>
+        </div>
+      </div>
+      <div class="detail-row">
+        <div class="d-icon">📧</div>
+        <div class="d-info">
+          <div class="d-label">Email</div>
+          <div class="d-value" id="m-email"></div>
+        </div>
+      </div>
+      <div class="detail-row">
+        <div class="d-icon">🕐</div>
+        <div class="d-info">
+          <div class="d-label">Available Time</div>
+          <div class="d-value" id="m-time"></div>
+        </div>
+      </div>
+      <div class="detail-row">
+        <div class="d-icon">🏫</div>
+        <div class="d-info">
+          <div class="d-label">Classes</div>
+          <div class="class-tags" id="m-classes"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const subjects = [
+      {
+        name: 'Mathematics', icon: '➗', color: '#6366f1', desc: 'Algebra, Calculus, Geometry',
+        teacher: 'Dr. Ramesh', phone: '9876543210', email: 'ramesh@school.com',
+        time: 'Mon-Fri 8AM-10AM', classes: ['10A', '11B', '12A']
+      },
+      {
+        name: 'Physics', icon: '⚛️', color: '#f59e0b', desc: 'Mechanics, Waves, Optics',
+        teacher: 'Mrs. Kavitha', phone: '9876543211', email: 'kavitha@school.com',
+        time: 'Mon-Fri 9AM-11AM', classes: ['11A', '11B', '12B']
+      },
+      {
+        name: 'Chemistry', icon: '🧪', color: '#10b981', desc: 'Organic, Inorganic, Physical',
+        teacher: 'Mr. Arjun', phone: '9876543212', email: 'arjun@school.com',
+        time: 'Tue-Sat 10AM-12PM', classes: ['10B', '11A', '12A']
+      },
+      {
+        name: 'English', icon: '📖', color: '#ef4444', desc: 'Grammar, Literature, Writing',
+        teacher: 'Ms. Priya', phone: '9876543213', email: 'priya@school.com',
+        time: 'Mon-Fri 11AM-1PM', classes: ['10A', '10B', '11A']
+      },
+      {
+        name: 'Computer Science', icon: '💻', color: '#8b5cf6', desc: 'Programming, Networks, DB',
+        teacher: 'Mr. Suresh', phone: '9876543214', email: 'suresh@school.com',
+        time: 'Mon-Wed 8AM-10AM', classes: ['11B', '12A', '12B']
+      },
+      {
+        name: 'Tamil', icon: '📜', color: '#ec4899', desc: 'Literature, Grammar, Poetry',
+        teacher: 'Mrs. Meena', phone: '9876543215', email: 'meena@school.com',
+        time: 'Mon-Sat 8AM-9AM', classes: ['10A', '10B', '11A', '11B']
+      },
+      {
+        name: 'Biology', icon: '🧬', color: '#14b8a6', desc: 'Botany, Zoology, Genetics',
+        teacher: 'Dr. Anitha', phone: '9876543216', email: 'anitha@school.com',
+        time: 'Tue-Fri 1PM-3PM', classes: ['11A', '12A', '12B']
+      },
+      {
+        name: 'History', icon: '🏛️', color: '#f97316', desc: 'Ancient, Medieval, Modern',
+        teacher: 'Mr. Kumar', phone: '9876543217', email: 'kumar@school.com',
+        time: 'Mon-Thu 2PM-4PM', classes: ['10A', '10B', '11B']
+      },
+    ];
+
+    // Render cards
+    const container = document.getElementById('cards');
+    subjects.forEach((s, i) => {
+      const card = document.createElement('div');
+      card.className = 'card';
+      card.style.borderColor = s.color;
+      card.innerHTML = `
+        <div class="icon">${s.icon}</div>
+        <h2>${s.name}</h2>
+        <p>${s.desc}</p>
+        <div class="teacher">👨‍🏫 ${s.teacher}</div>
+      `;
+      card.onclick = () => openModal(i);
+      container.appendChild(card);
+    });
+
+    function openModal(i) {
+      const s = subjects[i];
+      document.getElementById('m-title').textContent = s.name;
+      document.getElementById('m-teacher').textContent = s.teacher;
+      document.getElementById('m-phone').textContent = s.phone;
+      document.getElementById('m-email').textContent = s.email;
+      document.getElementById('m-time').textContent = s.time;
+
+      const tags = document.getElementById('m-classes');
+      tags.innerHTML = '';
+      s.classes.forEach(c => {
+        const tag = document.createElement('span');
+        tag.className = 'class-tag';
+        tag.textContent = c;
+        tags.appendChild(tag);
+      });
+
+      document.getElementById('modal-bg').classList.add('show');
+    }
+
+    function closeModal(e) {
+      if (e.target === document.getElementById('modal-bg')) {
+        document.getElementById('modal-bg').classList.remove('show');
+      }
+    }
+
+    function closeModalBtn() {
+      document.getElementById('modal-bg').classList.remove('show');
+    }
+  </script>
+
+</body>
+</html>
